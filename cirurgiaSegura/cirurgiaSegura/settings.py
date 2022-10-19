@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Realiza o vinculo do aplicaçao
     'checklist.apps.ChecklistConfig',
+    # Adicionando biblioteca de estilo app
+    'crispy_forms',
+    # Adicionado o bootstrap5
+    "crispy_bootstrap5",
 
 ]
 
@@ -57,6 +62,8 @@ ROOT_URLCONF = "cirurgiaSegura.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
+        # Leonardo diretorio da pasta template
+        # Define todas as paginas de tamplates do projeto, assim ela busca em cada modulo diretamente
         "DIRS": [os.path.join(BASE_DIR, 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -100,8 +107,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
+# Leonardo Aterar Lingua e Pais
 LANGUAGE_CODE = "pt-br"
 
+# Leonardo Aterar para time zone
 TIME_ZONE = "America/Sao_Paulo"
 
 USE_I18N = True
@@ -114,9 +123,16 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+# Leonardo criarndo static files na pasta static
+
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Adicionando tipo de biblioteca de estilo
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"

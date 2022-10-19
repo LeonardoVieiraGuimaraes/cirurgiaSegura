@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+</head>
+
+<body>
+
+    {% block header %}
+    <header class="container py-5 text-center p-3 mb-2 bg-success text-white">
+        <h1>Protocolo Multiprofissional</h1>
+        <h2>Checklist de Cirurgia Segura</h2>
+        <p>Versão 02</p>
+    </header>
+    {% endblock %}
+
+
+
+    {% block nav %}
+    <nav>
+
+    </nav>
+
+    {% endblock %}
+
+    {% block main %}
+    <main>
+
+    </main>
+    {% endblock %}
+
+    {% block footer %}
+    <footer>
+
+    </footer>
+
+    {% endblock %}
+
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/jquery-3.6.1.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+
+</body>
+
+</html>
