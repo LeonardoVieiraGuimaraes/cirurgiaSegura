@@ -4,22 +4,113 @@
 
 {% load crispy_forms_tags %}
 
-{% block section01 %}
-
-<!-- <h2>Cadastro Usuário</h2> -->
-
-<form action="." method="post" class="form-inline">
-    {% csrf_token %}
+{% block section %}
 
 
+<form action="." autocomplete="on" method="POST">
+    <fieldset>
+
+        <div class="form-group row">
 
 
+            <legend>Dados do Paciente </legend>
 
+            <p> <label for={{ form.nome.id_for_label }}>Paciente</label>
+                <input type="text" class="form-control" name="{{ form.nome.name }}" id={{ form.nome.id_for_label }}
+                    required>
+                {{ form.nome.id_for_label }}
+            </p>
+        </div>
+        <p> <label for="idNomeMae">Nome da Mãe </label>
+            <input type="text" name="nomeMae" id="idNomeMae" required>
+        </p>
 
-    {{ form|crispy }}
+        <p><label for="idDataNascimento">data de Nascimento</label>
+            <input type="date" name="dataNascimento" id="idDataNascimento" required>
+        </p>
+
+        <p><label for="idProntuario">Prontuario</label>
+            <input type="text" name="prontuario" id="idProntuario" required>
+        </p>
+
+    </fieldset>
 
 
     <fieldset>
+        <legend>Cirúrgia</legend>
+
+        <p> <label for="idCirurgiaProposta">Cirúrgia Proposta:</label>
+            <input type=" text" name="cirurgiaProposta" id="idCirurgiaProposta" required>
+        </p>
+
+
+
+        <p> <label for="idCirurgiaRealizada">Cirurgia Realizada:</label>
+            <input type=" text" name="cirurgiaRealizada" id="idCirurgiaRealizada" required>
+        </p>
+
+        <p> <label for="idSalaCirurgia">Sala da Cirurgia:</label>
+            <input type="text" name="salaCirurgia" id="idSalaCirurgia" required minlength="5" size="8" maxlength="20"
+                placeholder="'Minimo 8 letras">
+        </p>
+
+        <p> <label for="idDataCirurgia">Data Cirurgia:</label>
+            <input type="date" name="dataCirurgia" id="idDataCirurgia" required>
+        </p>
+
+        <p>
+            <label for="idModalidade">Modalidade:</label><br>
+
+            <input type="radio" name="Modalidade" id="idEletiva" value="Eletiva" required>
+            <label for="idEletiva">Eletiva</label><br>
+
+            <input type="radio" name="Modalidade" id="idUrgencia" value="Urgência" required>
+            <label for="idUrgencia">Urgência</label><br>
+
+            <input type="radio" name="Modalidade" id="idEmergencia" value="Emergência" required>
+            <label for="idEmergencia">Emergência</label><br>
+        </p>
+
+
+
+</form>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <h2>Cadastro Usuário</h2>
+
+<form action="." method="post" class="form-inline">
+    {% csrf_token %} -->
+
+
+
+
+
+
+<!-- {{ form|crispy }} -->
+
+
+<!-- <fieldset>
 
         <div class="container d-inline-flex p-2">
             <label for="id_nome" class="sr-only">Nome</label>
@@ -36,24 +127,24 @@
 
             <input type="radio" name="{{ form.modalidade.name }}" id={{ form.modalidade.id }}>
 
-            <!-- {{ form.dataNascimento }} -->
+          {{ form.dataNascimento }}
 
 
         </div>
 
 
 
-        <!-- {{ form.modalidade }} -->
+       {{ form.modalidade }}
 
         <button type="submit" class="btn btn-primary mb-2">Salvar Formulário</button>
 
-        <!-- <input type="text"
+        <input type="text"
        name="{{ form.name.name }}"
        id="{{ form.name.id_for_label }}"
        {% if form.name.value != None %}value="{{ form.name.value|stringformat:'s' }}"{% endif %}
        maxlength="{{ form.name.field.max_length }}"
        {% if form.name.field.required %}required{% endif %}> -->
-
+<!-- 
     </fieldset>
     <input type="submit" value="Cadastrar">
 
@@ -66,6 +157,4 @@
     {{ form.modalidade.id_modalidade }}
 
 
-</form>
-
-{% endblock %}
+</form> -->
