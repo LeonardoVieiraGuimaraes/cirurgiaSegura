@@ -1,6 +1,5 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -17,6 +16,7 @@
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
 </head>
 
 <body>
@@ -41,7 +41,16 @@
                             <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'paciente_cirurgia' %}">Cadastro</a>
+                            <a class="nav-link" href="{% url 'PacienteCirurgia' %}">Cadastro Paciente e Cirurgia</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'SalaEsperaCC' %}">Cadastro Sala de Espera </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'AntesInicisaoC' %}">Cadastro Antes Inicisao </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'AntesUsuarioSSC' %}">Cadastro Antes Usuario </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Referências</a>
@@ -63,17 +72,19 @@
     <main class="container">
         <h1>Checklist de Cirurgia Segura</h1>
 
-        {% block section %}
-        <section>
+        {% block form %}
+        <form action="." method="post"></form>
 
 
-        </section>
+        </form>
         {% endblock %}
     </main>
 
 
     {% block footer %}
-    <footer>
+    <footer class="container text-center p-3 mb-2 bg-success text-white">
+
+        <span class="bi bi-instagram"></span>
 
     </footer>
     {% endblock %}

@@ -40,6 +40,10 @@ class PacienteCirurgia(models.Model):
 
 
 class SalaEsperaCC(models.Model):
+
+    pacienteCirurgiaSECC = models.ForeignKey(
+        PacienteCirurgia, on_delete=models.CASCADE)
+
     # Usuário informa: pacienteInforma = models.CharField(max_length=50)
     # Pulseira de identificação  ( ) S  (  ) N
     pulseriaIdentificacao = models.CharField(max_length=1)
@@ -58,10 +62,10 @@ class SalaEsperaCC(models.Model):
     sitioCirurgico = models.CharField(max_length=1)
     # Alergias conhecidas? (   )  N (  ) S Qual?
     alergiasConhecidas = models.CharField(max_length=1)
-    QualAC = models.CharField(max_length=20)
+    qualAC = models.CharField(max_length=20)
     # Risco de via aérea difícil/bronco aspiração?   ( ) N (  ) S  há equipamento disponível?
     riscoViaA = models.CharField(max_length=1)
-    EquipamentoDisponivelRVA = models.IntegerField()
+    equipamentoDisponivelRVA = models.IntegerField()
     # Risco de perda sanguínea > 500 mL ou 7mL/Kg em crianças? (    ) N  (   ) S
     riscoPerdaSa = models.CharField(max_length=1)
 
@@ -70,7 +74,7 @@ class SalaEsperaCC(models.Model):
     # (    ) Baraka                  (   ) Circuito de anestesia  (   ) Laringoscópio
     equipamentosAnestesiaTF = models.CharField(max_length=15)
     # Caixas e instrumentais cirúrgicos presentes e estéreis?   (   ) S   (   ) N
-    CaixasInstrumentaisCPE = models.CharField(max_length=1)
+    caixasInstrumentaisCPE = models.CharField(max_length=1)
 
 # Prontuário
     # Formulário identificação    (   ) sim    (   ) não
@@ -84,40 +88,50 @@ class SalaEsperaCC(models.Model):
     # Consentimento  Cirúrgico  (   ) sim    (   ) não
     consentimentoCirurgico = models.CharField(max_length=1)
     # Consentimento  anestésico  (   ) sim    (   ) não
-    consentimentoAnestésico = models.CharField(max_length=1)
+    consentimentoAnestesico = models.CharField(max_length=1)
     # Avaliação pré – anestésica   (   ) sim    (   ) não
-    avaliaçãoPreA = models.CharField(max_length=1)
+    avaliaçaoPreA = models.CharField(max_length=1)
 
 # ANTES DA INICISÃO CIRÚRGICA
-    class AntesInicisaoC(models.Model):
-        # Todos os profissionais confirmam nome e função?  (  ) N  (  ) S
-        todosProfissionaisCNF = models.CharField(max_length=1)
-        # O cirurgião, anestesista e equipe de enfermagem confirmam:
-        #   (  ) identificação do paciente  (  ) sitio cirúrgico (  )  procedimento
-        cirurgiaoAnestesistaEEC = models.CharField(max_length=15)
-        # O antibiótico profilático foi administrado nos últimos 60 min?
-        # (    ) NA    (   ) N   (   ) S   Hora:________:_______
-        antibioticoProfilaticoAU = models.CharField(max_length=1)
-        horaAPAU = models.TimeField()
-        # Exames de imagem estão disponíveis? (    ) N   (    ) S
-        examesImagemD = models.CharField(max_length=1)
-    # Antecipação de eventos críticos:
-        # Revisão cirurgião: Há etapas críticas durante o procedimento?
-        # (  ) N  (  ) S, qual?
-        RevisaoCirurgiaoECDP = models.CharField(max_length=1)
-        qualRCECDP = models.CharField(max_length=15)
-        # Revisão anestesista: Há alguma preocupação especifica em relação ao usuário?   (  ) N (  ) S, qual?
-        RevisaoAnestesistaAPERU = models.CharField(max_length=1)
-        # Revisão da enfermagem: Instrumentais cirúrgicos estéreis e conferidos? (  ) N (  ) S
-        RevisaoEnfermagemICEC = models.CharField(max_length=1)
-        # Placa de bisturi posicionado? (  ) N (  ) S (  ) NA
-        palcaBisturiP = models.CharField(max_length=1)
-        # Equipamento testado e funcionantes?  (  ) N  (  ) S
-        EquipamentoTestadoF = models.CharField(max_length=1)
+
+
+class AntesInicisaoC(models.Model):
+    pacienteCirurgiaAIC = models.ForeignKey(
+        PacienteCirurgia, on_delete=models.CASCADE)
+
+    # Todos os profissionais confirmam nome e função?  (  ) N  (  ) S
+    todosProfissionaisCNF = models.CharField(max_length=1)
+    # O cirurgião, anestesista e equipe de enfermagem confirmam:
+    #   (  ) identificação do paciente  (  ) sitio cirúrgico (  )  procedimento
+    cirurgiaoAnestesistaEEC = models.CharField(max_length=15)
+    # O antibiótico profilático foi administrado nos últimos 60 min?
+    # (    ) NA    (   ) N   (   ) S   Hora:________:_______
+    antibioticoProfilaticoAU = models.CharField(max_length=1)
+    horaAPAU = models.TimeField()
+    # Exames de imagem estão disponíveis? (    ) N   (    ) S
+    examesImagemD = models.CharField(max_length=1)
+# Antecipação de eventos críticos:
+    # Revisão cirurgião: Há etapas críticas durante o procedimento?
+    # (  ) N  (  ) S, qual?
+    revisaoCirurgiaoECDP = models.CharField(max_length=1)
+    qualRCECDP = models.CharField(max_length=15)
+    # Revisão anestesista: Há alguma preocupação especifica em relação ao usuário?   (  ) N (  ) S, qual?
+    revisaoAnestesistaAPERU = models.CharField(max_length=1)
+    # Revisão da enfermagem: Instrumentais cirúrgicos estéreis e conferidos? (  ) N (  ) S
+    revisaoEnfermagemICEC = models.CharField(max_length=1)
+    # Placa de bisturi posicionado? (  ) N (  ) S (  ) NA
+    palcaBisturiP = models.CharField(max_length=1)
+    # Equipamento testado e funcionantes?  (  ) N  (  ) S
+    equipamentoTestadoF = models.CharField(max_length=1)
+
+    def __str__(self):
+        return "{} ({})".format(self.nome, self.prontuario)
 
 
 # ANTES DO USÚARIO SAIR DA SALA DE CIRÚRGIA  ( contagem )
 class AntesUsuarioSSC(models.Model):
+    pacienteCirurgiaAUSSC = models.ForeignKey(
+        PacienteCirurgia, on_delete=models.CASCADE)
 
     # 	    Instrumentais Compressas Agulhas Lâmina de bisturi
     # ANTES			-         -         -           -

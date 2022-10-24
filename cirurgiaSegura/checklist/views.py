@@ -3,7 +3,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
-from .models import PacienteCirurgia
+from .models import PacienteCirurgia, SalaEsperaCC, AntesInicisaoC, AntesUsuarioSSC
 
 
 # Create your views here.
@@ -22,6 +22,33 @@ class PacienteCirurgiaCreateView(CreateView):
     fields = ['nome', 'dataNascimento', 'nomeMae', 'prontuario', 'nomeMae',
               'cirurgiaProposta', 'cirurgiaRealizada', 'salaCirugica', 'dataCirurugia', 'modalidade', 'realizouQuimeoterapia', 'quantasSQ']
     template_name = 'forms/form01.html'
+
+    success_url = reverse_lazy('index')
+
+
+class SalaEsperaCCCreateView(CreateView):
+    model = SalaEsperaCC
+    fields = ['pulseriaIdentificacao', 'jejum', 'inicioJ', 'triconomiaRealizada', 'realizouBanho', 'preparoIntestinal',
+              'semProtese', 'sitioCirurgico', 'alergiasConhecidas', 'qualAC', 'riscoViaA', 'equipamentoDisponivelRVA', 'riscoPerdaSa', 'equipamentosAnestesiaTF', 'caixasInstrumentaisCPE', 'formularioIdentificacao', 'relatorioEnfermagem', 'fichaSinaisV', 'exameLaboratI', 'consentimentoCirurgico', 'consentimentoAnestesico', 'avaliaçaoPreA']
+    template_name = 'forms/form02.html'
+
+    success_url = reverse_lazy('index')
+
+
+class AntesInicisaoCCreateView(CreateView):
+    model = AntesInicisaoC
+    fields = ['pacienteCirurgiaAIC', 'todosProfissionaisCNF', 'cirurgiaoAnestesistaEEC', 'antibioticoProfilaticoAU', 'examesImagemD',
+              'revisaoCirurgiaoECDP', 'qualRCECDP', 'revisaoAnestesistaAPERU', 'revisaoEnfermagemICEC', 'palcaBisturiP', 'equipamentoTestadoF']
+    template_name = 'forms/form03.html'
+
+    success_url = reverse_lazy('index')
+
+
+class AntesUsuarioSSCCreateView(CreateView):
+    model = AntesUsuarioSSC
+    fields = ['pacienteCirurgiaAUSSC', 'instrumentaisAntes', 'compressasAntes', 'agulhasAntes', 'laminaBisturiAntes',
+              'instrumentaisDepois', 'compressasDepois', 'agulhasDepois', 'laminaBisturiDepois', 'RegistoCompletoPIRLP', 'houveAglumPMEI', 'QualHAPMEI', 'altaConfirmadaAE']
+    template_name = 'forms/form04.html'
 
     success_url = reverse_lazy('index')
 
