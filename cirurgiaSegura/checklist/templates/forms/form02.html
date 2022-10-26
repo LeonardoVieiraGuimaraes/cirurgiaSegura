@@ -1,260 +1,86 @@
 {% extends 'base.html' %}
 
-{% load static %}
-
-{% load crispy_forms_tags %}
-
 {% block form %}
 
+
 <fieldset>
-    <legend>Sala de Espera do Centro Cirurgico</legend>
-    Usuario Informa: <br>
 
-    <p>
-        Pulseira de identificação : <br>
+    <legend>Cirúrgia</legend>
 
-        <input type="radio" name="pulseiraIdentificacao" id="idSimpulseiraIdentificacao" value="Sim">
-        <label for="idSimpulseiraIdentificacao">Sim</label><br>
-
-        <input type="radio" name="pulseiraIdentificacao" id="idNaopulseiraIdentificacao" value="Não">
-        <label for="idNaopulseiraIdentificacao">Não</label>
-
+    <p> <label for="{{ form.cirurgiaProposta.id_for_label }}">Cirúrgia Proposta:</label>
+        <input type=" text" name="{{ form.cirurgiaProposta.name }}" id="{{ form.cirurgiaProposta.id_for_label }}"
+            value="{{ form.cirurgiaProposta.value | default_if_none:'' }}" required>
     </p>
 
-    <p>
-        Jejum : <br>
-
-        <input type="radio" name="jejum" id="idSimJejum" value="Sim">
-        <label for="idSimJejum">Sim</label>
-        <label for="idInicio">Inicio:</label>
-        <input type="datetime" name="inicio" id="idInicio"><br>
-
-        <input type="radio" name="jejum" id="idNaoJejum" value="Não">
-        <label for="idNaoJejum">Não</label>
-
+    <p> <label for="{{ form.cirurgiaRealizada.id_for_label }}">Cirurgia Realizada:</label>
+        <input type=" text" name="{{ form.cirurgiaRealizada.name }}" id="{{ form.cirurgiaRealizada.id_for_label }}"
+            value="{{ form.cirurgiaRealizada.value | default_if_none:'' }}" required>
     </p>
 
-    <p>
-        Tricotomia Realizada: <br>
-
-        <input type="radio" name="tricotomia" id="idSimTricotomia" value="Sim">
-        <label for="idSimTricotomia">Sim</label><br>
-
-        <input type="radio" name="tricotomia" id="idNaoTricotomia" value="Não">
-        <label for="idNaoTricotomia">Não</label>
-
+    <p> <label for="{{ form.salaCirugica.id_for_label }}">Sala Cirurgica:</label>
+        <input type=" text" name="{{ form.salaCirugica.name }}" id="{{ form.salaCirugica.id_for_label }}"
+            value="{{ form.salaCirugica.value | default_if_none:'' }}" required>
     </p>
 
-    <p>
-        Realizou o banho: <br>
-
-        <input type="radio" name="banho" id="idSimBanho" value="Sim">
-        <label for="idSimBanho">Sim</label><br>
-
-        <input type="radio" name="banho" id="idNaoBanho" value="Não">
-        <label for="idNaoBanho">Não</label>
-
+    <p> <label for="{{ form.dataCirurugia.id_for_label }}">Data da Cirurgia:</label>
+        <input type="date" name="{{ form.dataCirurugia.name }}" id="{{ form.dataCirurugia.id_for_label }}"
+            value="{{ form.dataCirurugia.value | date:'Y-m-d' | default_if_none:''}}" required>
     </p>
-
-    <p>
-        Preparo Intestinal: <br>
-
-        <input type="radio" name="intestinal" id="idSimIntestinal" value="Sim">
-        <label for="idSimIntestinal">Sim</label><br>
-
-        <input type="radio" name="intestinal" id="idNaoIntestinal" value="Não">
-        <label for="idNaoIntestinal">Não</label><br>
-
-        <input type="radio" name="intestinal" id="idNAIntestinal" value="Não">
-        <label for="idNAIntestinal">NA</label>
-
-    </p>
-
-    <p>
-        Sem Prótese: <br>
-
-        <input type="radio" name="protese" id="idSimProtese" value="Sim">
-        <label for="idSimProtese">Sim</label><br>
-
-        <input type="radio" name="protese" id="idNaoProtese" value="Não">
-        <label for="idNaoProtese">Não</label>
-
-    </p>
-
-
-    <p>
-        Sítio Cirúrgico Demarcado Corretamente? <br>
-
-        <input type="radio" name="sitioCirurgico" id="idSimSitioCirurgico" value="Sim">
-        <label for="idSimSitioCirurgicoDemarcado">Sim</label><br>
-
-        <input type="radio" name="intestinal" id="idNaoSitioCirurgico" value="Não">
-        <label for="idNaoSitioCirurgico">Não</label><br>
-
-        <input type="radio" name="intestinal" id="idNASitioCirurgico" value="NA">
-        <label for="idNASitioCirurgico">NA</label>
-
-    </p>
-
-    <p>
-        Alergias conhecidas? <br>
-
-        <input type="radio" name="alergiasConhecidas" id="idSimAlergiasConhecidas" value="Sim">
-        <label for="idSimSitioCirurgicoDemarcado">Sim</label>
-
-
-        <label for="idQualAlergiasConhecidas">Qual?</label>
-        <input type="text" name="qualAlergiasConhecidas" id="idQualergiasConhecidas"><br>
-
-        <input type="radio" name="alergiasConhecidas" id="idNaoAlergiasConhecidas" value="Não">
-        <label for="idNaoAlergiasConhecidas">Não</label><br>
-    </p>
-
-    <p>
-        Risco de via aérea difícil/bronco aspiração? <br>
-
-        <input type="radio" name="riscoVia" id="idSimRiscoVia" value="Sim">
-        <label for="idSimRiscoVia">Sim</label>
-
-
-        <label for="idEquipamentosDisponivel">há equipamento
-            disponível?</label>
-        <input type="text" name="equipamentosDisponivel" id="idEquipamentosDisponivel"><br>
-
-        <input type="radio" name="alergiasConhecidas" id="idNaoRiscoVia" value="Não">
-        <label for="idNaoRiscoVia">Não</label><br>
-    </p>
-
-    <p>
-        Risco de perda sanguínea > 500 mL ou 7mL/Kg em crianças? <br>
-
-        <input type="radio" name="risdoPerda" id="idSimRisdoPerda" value="Sim">
-        <label for="idSimRisdoPerda">Sim</label><br>
-
-
-        <input type="radio" name="risdoPerda" id="idNaoRisdoPerda" value="Não">
-        <label for="idNaoRisdoPerda">Não</label><br>
-    </p>
-
-    <p>
-        Equipamentos de anestesia testados e funcionante? <br>
-
-        <input type="checkbox" name="equipamentosAnestesia" id="idEquipamentosAnestesia" value="Carrinho de Anestesia">
-        <label for="idEquipamentosAnestesia">Carrinho de Anestesia</label><br>
-
-
-        <input type="checkbox" name="equipamentosAnestesia" id="idMonitorizacao" value="Monitorização">
-        <label for="idMonitorizacao">Monitorização</label><br>
-
-        <input type="checkbox" name="equipamentosAnestesia" id="idSuporteO2" value="Suporte de O2">
-        <label for="idSuporteO2">Suporte de O2</label><br>
-
-        <input type="checkbox" name="equipamentosAnestesia" id="idBaraka" value="Não">
-        <label for="idBaraka">Baraka</label><br>
-
-        <input type="checkbox" name="equipamentosAnestesia" id="idCircuitoAnestesia" value="Circuito de anestesia">
-        <label for="idCircuitoAnestesia">Circuito de anestesia</label><br>
-
-        <input type="checkbox" name="equipamentosAnestesia" id="idLaringoscopio" value="Laringoscópio">
-        <label for="idLaringoscopio">Laringoscópio</label><br>
-    </p>
-
-    <p>
-        Caixas e instrumentais cirúrgicos presentes e estéreis?<br>
-
-        <input type="radio" name="caixasInstrumentais" id="idSimCaixasInstrumentais" value="Sim">
-        <label for="idSimCaixasInstrumentais">Sim</label><br>
-
-
-        <input type="radio" name="caixasInstrumentaisCirurgicos" id="idNaoCaixasInstrumentaisCirurgicos" value="Não">
-        <label for="idNaoCaixasInstrumentaisCirurgicos">Não</label><br>
-    </p>
-
-    <fieldset>
-        <legend>Prontuário</legend>
+    <div>
+        <p>Modalidade:</p>
         <p>
 
-            Formulário de identificação <br>
+            <input {% if form.modalidade.value == "Eletiva" %} checked {% endif %} type="radio"
+                name="{{ form.modalidade.name }}" id="idEletiva" value="Eletiva" checked>
+            <label for="idEletiva">Eletiva</label><br>
 
-            <input type="radio" name="formularioIdentificacao" id="idSimFormularioIdentificacao" value="Sim">
-            <label for="idSimFormularioIdentificacao">Sim</label><br>
+            <input  {% if form.modalidade.value == "Urgência" %} checked {% endif %} type="radio" name="{{ form.modalidade.name }}" id="idUrgencia" value="Urgência">
+            <label for="idUrgencia">Urgência</label><br>
 
-
-            <input type="radio" name="formularioIdentificacao" id="idNaoFormularioIdentificacao" value="Não">
-            <label for="idNaoFormularioIdentificacao">Não</label><br>
+            <input {% if form.modalidade.value == "Emergência" %} checked {% endif %} type="radio" name="{{ form.modalidade.name }}" id="idEmergencia" value="Emergência">
+            <label for="idEmergencia">Emergência</label><br>
         </p>
 
-        <p>
-            Relatório enfermagem<br>
+    </div>
+    <p>Realizou Quimeoterapia:</p>
 
-            <input type="radio" name="relatorioEnfermagem" id="idSimRelatorioEnfermagem" value="Sim">
-            <label for="idSimRelatorioEnfermagem">Sim</label><br>
+    <p>
+        <input{% if form.realizouQuimeoterapia.value == "s" %} checked {% endif %} type="radio" name="{{ form.realizouQuimeoterapia.name }}" id="realizouQuimeoterapiaS" value="s" required>
+        <label for="realizouQuimeoterapiaS">Sim</label>
 
-            <input type="radio" name="relatorioEnfermagem" id="idNaoRelatorioEnfermagem" value="Não">
-            <label for="idNaoRelatorioEnfermagem">Não</label><br>
+        <label for="{{ form.quantasSQ.id_for_label }}">Quantas:</label>
+        <input type="number" name="{{ form.quantasSQ.name }}" id="{{ form.quantasSQ.id_for_label }}" value="{{ form.quantasSQ.value | default_if_none:'' }}" required><br>
 
-            <input type="radio" name="relatorioEnfermagem" id="idNARelatorioEnfermagem" value="NA">
-            <label for="idNARelatorioEnfermagem">NA</label><br>
-        </p>
+        <input <input{% if form.realizouQuimeoterapia.value == "n" %} checked {% endif %} type="radio" name="{{ form.realizouQuimeoterapia.name }}" id="realizouQuimeoterapiaN" value="n" required>
+        <label for="realizouQuimeoterapiaN">Não</label><br>
 
-        <p>
-            Ficha de sinais vitais<br>
+    </p>
 
-            <input type="radio" name="fichaSinaisVitais" id="idSimFichaSinaisVitais" value="Sim">
-            <label for="idSimFichaSinaisVitais">Sim</label><br>
+    <p>Realizou Radioterapia:</p>
+    <div class="form-group">
+    <p>
+        <input <input {% if form.realizouRadioterapia.value == "s" %} checked {% endif %} type="radio" name="{{ form.realizouRadioterapia.name }}" id="realizouRadioterapiaS" value="s">
+        <label for="realizouRadioterapiaS" oninput = "EnableDisable({{ form.quantasRR.id_for_label }}" >Sim</label>
 
-            <input type="radio" name="fichaSinaisVitais" id="idNaoFichaSinaisVitais" value="Não">
-            <label for="idNaoFichaSinaisVitais">Não</label><br>
+        <label for="{{ form.realizouRadioterapia.id_for_label }}">Quantas:</label>
+        <input {{ name }} type="number" name="{{ form.quantasRR.name }}" id="{{ form.quantasRR.id_for_label }}"  value="{{ form.quantasSQ.value | default_if_none:'' }}" required><br>
 
-            <input type="radio" name="fichaSinaisVitais" id="idNAFichaSinaisVitais" value="NA">
-            <label for="idNAFichaSinaisVitais">NA</label><br>
-        </p>
+        <input <input{% if form.realizouRadioterapia.value == "n" %} checked {% endif %} type="radio" name="{{ form.realizouRadioterapia.name }}" id="realizouRadioterapiaN" value="n" required>
+        <label for="realizouRadioterapiaN">Não</label><br>
 
-        <p>
-            Exame: (Laborat. Imagnes)<br>
+    </p>
+    </div>
 
-            <input type="radio" name="exameLaborat" id="idSimExameLaborat" value="Sim">
-            <label for="idSimExameLaborat">Sim</label><br>
-
-            <input type="radio" name="exameLaborat" id="idNaoExameLaborat" value="Não">
-            <label for="idNaoExameLaborat">Não</label><br>
-        </p>
-
-        <p>
-            Consentimento Cirúrgico<br>
-
-            <input type="radio" name="consetimentoCirurgico" id="idSimConsetimentoCirurgico" value="Sim">
-            <label for="idSimConsetimentoCirurgico">Sim</label><br>
-
-            <input type="radio" name="consetimentoCirurgico" id="idNaoConsetimentoCirurgico" value="Não">
-            <label for="idNaoConsetimentoCirurgico">Não</label><br>
-        </p>
-
-        <p>
-            Consentimento anestésico<br>
-
-            <input type="radio" name="consetimentoAnestesico" id="idSimConsetimentoAnestesico" value="Sim">
-            <label for="idSimConsetimentoAnestesico">Sim</label><br>
-
-            <input type="radio" name="consetimentoAnestesico" id="idNaoConsetimentoAnestesico" value="Não">
-            <label for="idNaoConsetimentoAnestesico">Não</label><br>
-        </p>
-
-        <p>
-            Avaliação pré – anestésica<br>
-
-            <input type="radio" name="avaliacaoAnestesica" id="idSimAvaliacaoAnestesica" value="Sim">
-            <label for="idSimAvaliacaoAnestesica">Sim</label><br>
-
-            <input type="radio" name="avaliacaoAnestesica" id="idNaoAvaliacaoAnestesica" value="Não">
-            <label for="idNaoAvaliacaoAnestesica">Não</label><br>
-        </p>
-    </fieldset>
+    <p>{{ form.paciente }}</p>
 
 </fieldset>
 
-<p><input type="submit" value="Enviar">
-    <input type="reset" value="Limpar">
-</p>
+<script>
+
+    function EnableDisable(id_i, id_j) {
+
+        document.getElementById(id).disabled = true;
+    }
+</script>
 
 {% endblock %}

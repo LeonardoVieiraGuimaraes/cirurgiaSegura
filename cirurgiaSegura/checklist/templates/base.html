@@ -41,16 +41,19 @@
                             <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'PacienteCirurgia' %}">Cadastro Paciente e Cirurgia</a>
+                            <a class="nav-link" href="{% url 'CreatePaciente' %}">Cadastro Paciente</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'SalaEsperaCC' %}">Cadastro Sala de Espera </a>
+                            <a class="nav-link" href="{% url 'CreateCirurgia' %}">Cadastro Cirurgia</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'AntesInicisaoC' %}">Cadastro Antes Inicisao </a>
+                            <a class="nav-link" href="{% url 'CreateSalaEsperaCC' %}">Cadastro Sala de Espera </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'AntesUsuarioSSC' %}">Cadastro Antes Usuario </a>
+                            <a class="nav-link" href="{% url 'CreateAntesInicisaoC' %}">Cadastro Antes Inicisao </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'CreateAntesUsuarioSSC' %}">Cadastro Antes Usuario </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Referências</a>
@@ -63,30 +66,39 @@
     </header>
     {% endblock %}
 
-    {% block nav %}
-
-
-    {% endblock %}
-
 
     <main class="container">
-        <h1>Checklist de Cirurgia Segura</h1>
 
-        {% block form %}
-        <form action="." method="post"></form>
 
+
+
+        <form method="post">
+            {% csrf_token %}
+            {% block form %}
+            <h1>Checklist de Cirurgia Segura</h1>
+            {% endblock %}
+            <div class="col-md-12">
+                <ul class="list-inline text-right">
+                    <li class="list-inline-item">
+                        <button type="reset" class="btn btn-secondary">Limpar</button>
+                        <button type="submit" class="btn btn-secondary">Salvar</button>
+                    </li>
+                </ul>
+            </div>
 
         </form>
-        {% endblock %}
+
+
+
     </main>
 
 
     {% block footer %}
     <footer class="container text-center p-3 mb-2 bg-success text-white">
 
-        <img src="{% static 'icons/facebook.svg' %}" alt="">
-        <img src="{% static 'icons/instagram.svg' %}" alt="">
-
+        <p> <img src="{% static 'icons/facebook.svg' %}" alt="facebook"></p>
+        <p><img src="{% static 'icons/instagram.svg' %}" alt="instagram">
+        </p>
     </footer>
     {% endblock %}
 

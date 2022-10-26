@@ -28,6 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Date Format Default
+
+
+DATE_INPUT_FORMATS = ['%d/%m/%Y']
 
 # Application definition
 

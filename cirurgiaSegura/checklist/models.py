@@ -1,3 +1,4 @@
+from email.policy import default
 from unittest.util import _MAX_LENGTH
 from django.db import models
 
@@ -5,17 +6,24 @@ from django.db import models
 # Create your models here.
 
 
-class PacienteCirurgia(models.Model):
+class Paciente(models.Model):
     # Cadastro Paciente
     # Nome do Paciente
-    nome = models.CharField(max_length=50)
+    nome = models.CharField(max_length=50, null=True, blank=True)
     # Data de Nascimento Paciente
     dataNascimento = models.DateField()
     # Nome da Mãe do Paciente
-    nomeMae = models.CharField(max_length=50)
+    nomeMae = models.CharField(max_length=50, blank=True)
     # Protuário do Paciente
-    prontuario = models.CharField(max_length=15)
+    prontuario = models.CharField(max_length=15, blank=True)
+
+    def __str__(self):
+        return "{} - {}".format(self.prontuario, self.nome)
+
 # Cadastro para Cirurgia
+
+
+class Cirurgia(models.Model):
     # Cirurgia Proposta:
     cirurgiaProposta = models.CharField(max_length=50)
     # Cirurgia Realizada:
@@ -23,9 +31,9 @@ class PacienteCirurgia(models.Model):
     # Sala Cirurgica:
     salaCirugica = models.CharField(max_length=50)
     # Data da Cirurgia:
-    dataCirurugia = models.DateField(max_length=10)
-    # Modalidade ( ) Eletiva (  )Urgência
-    modalidade = models.CharField(max_length=1)
+    dataCirurugia = models.DateField()
+    # Modalidade ( ) Eletiva (  )Urgência ( )Emergência
+    modalidade = models.CharField(max_length=10)
     # Relizou Quimeoterapia : ( ) N ( ) S Quantas sessões
     realizouQuimeoterapia = models.CharField(max_length=1)
     quantasSQ = models.IntegerField()
@@ -33,16 +41,16 @@ class PacienteCirurgia(models.Model):
     realizouRadioterapia = models.CharField(max_length=1)
     quantasRR = models.IntegerField()
 
+    paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT)
+
     def __str__(self):
-        return "{} ({})".format(self.nome, self.prontuario)
+        return "{} - {}".format(self.paciente.prontuario, self.paciente.nome)
+
 
 # SALA DE ESPERA DO CENTRO  CIRÚRGICO
 
 
 class SalaEsperaCC(models.Model):
-
-    pacienteCirurgiaSECC = models.ForeignKey(
-        PacienteCirurgia, on_delete=models.CASCADE)
 
     # Usuário informa: pacienteInforma = models.CharField(max_length=50)
     # Pulseira de identificação  ( ) S  (  ) N
@@ -92,14 +100,17 @@ class SalaEsperaCC(models.Model):
     # Avaliação pré – anestésica   (   ) sim    (   ) não
     avaliaçaoPreA = models.CharField(max_length=1)
 
+    paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return "{} - {}".format(self.paciente.prontuario, self.paciente.nome)
+
+
 # ANTES DA INICISÃO CIRÚRGICA
 
 
 class AntesInicisaoC(models.Model):
-    pacienteCirurgiaAIC = models.ForeignKey(
-        PacienteCirurgia, on_delete=models.CASCADE)
-
-    # Todos os profissionais confirmam nome e função?  (  ) N  (  ) S
+   # Todos os profissionais confirmam nome e função?  (  ) N  (  ) S
     todosProfissionaisCNF = models.CharField(max_length=1)
     # O cirurgião, anestesista e equipe de enfermagem confirmam:
     #   (  ) identificação do paciente  (  ) sitio cirúrgico (  )  procedimento
@@ -124,15 +135,14 @@ class AntesInicisaoC(models.Model):
     # Equipamento testado e funcionantes?  (  ) N  (  ) S
     equipamentoTestadoF = models.CharField(max_length=1)
 
+    paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT)
+
     def __str__(self):
-        return "{} ({})".format(self.nome, self.prontuario)
+        return "{} - {}".format(self.paciente.prontuario, self.paciente.nome)
 
 
 # ANTES DO USÚARIO SAIR DA SALA DE CIRÚRGIA  ( contagem )
 class AntesUsuarioSSC(models.Model):
-    pacienteCirurgiaAUSSC = models.ForeignKey(
-        PacienteCirurgia, on_delete=models.CASCADE)
-
     # 	    Instrumentais Compressas Agulhas Lâmina de bisturi
     # ANTES			-         -         -           -
     # DEPOIS		-		  -         -           -
@@ -154,6 +164,11 @@ class AntesUsuarioSSC(models.Model):
     # (   )  UTI        (   )  RPA         Hora:
     altaConfirmadaAE = models.CharField(max_length=1)
 
+    paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return "{} - {}".format(self.paciente.prontuario, self.paciente.nome)
+
 # class Order(models.Model):
 #     first_name = models.CharField(max_length=50)
 #     last_name = models.CharField(max_length=50)
@@ -166,15 +181,15 @@ class AntesUsuarioSSC(models.Model):
 #     paid = models.BooleanField(default=False)
 
 
-# CHOICES = [('item1', 'item 1'),
-#            ('item2', 'item 2')]
+# # CHOICES = [('item1', 'item 1'),
+# #            ('item2', 'item 2')]
 
 
-# class OrderCreateForm(ModelForm):
-#     postal_code = forms.ChoiceField(
-#         choices=CHOICES, widget=forms.RadioSelect())
+# # class OrderCreateForm(ModelForm):
+# #     postal_code = forms.ChoiceField(
+# #         choices=CHOICES, widget=forms.RadioSelect())
 
-#     class Meta:
-#         model = Order
-#         fields = ['first_name', 'last_name', 'email',
-#                   'address', 'postal_code', 'city']
+# #     class Meta:
+# #         model = Order
+# #         fields = ['first_name', 'last_name', 'email',
+# #                   'address', 'postal_code', 'city']
